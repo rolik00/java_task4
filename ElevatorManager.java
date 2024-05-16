@@ -32,7 +32,6 @@ public class ElevatorManager {
     }
     public synchronized void add_passenger(Request request)
     {
-        //System.out.println("\uD83D\uDCEC Новый запрос: c " + (request.start_floor + 1) + " до " + (request.end_floor + 1) + " этажа");
         Main.start_floor = (request.start_floor + 1 < 10 ? Integer.toString(request.start_floor + 1) + " " : Integer.toString(request.start_floor + 1));
         Main.end_floor = (request.end_floor + 1 < 10 ? Integer.toString(request.end_floor + 1) + " " : Integer.toString(request.end_floor + 1));
         floors_queue.get(request.start_floor).get(request.direction).add(request.end_floor);
@@ -42,32 +41,27 @@ public class ElevatorManager {
             {
                 first.target_floors.add(request.start_floor);
                 first.passenger_status = request.direction;
-                //System.out.println("☑ Лифт №1 принял запрос на " + (request.start_floor + 1) + " этаже и едет " + (request.direction == 1 ? "вверх" : "вниз"));
             }
             else
             {
                 second.target_floors.add(request.start_floor);
                 second.passenger_status = request.direction;
-                //System.out.println("☑ Лифт №2 принял запрос на " + (request.start_floor + 1) + " этаже и едет " + (request.direction == 1 ? "вверх" : "вниз"));
             }
         }
         else if (first.target_floors.isEmpty() || (first.passenger_status == request.direction && ((request.direction == 1 && first.current_floor <= request.start_floor) || (request.direction == -1 && first.current_floor >= request.start_floor))))
         {
             first.target_floors.add(request.start_floor);
             first.passenger_status = request.direction;
-            //System.out.println("☑ Лифт №1 принял запрос на " + (request.start_floor + 1) + " этаже и едет " + (request.direction == 1 ? "вверх" : "вниз"));
         }
         else if (second.target_floors.isEmpty() || (second.passenger_status == request.direction && ((request.direction == 1 && second.current_floor <= request.start_floor) || (request.direction == -1 && second.current_floor >= request.start_floor))))
         {
             second.target_floors.add(request.start_floor);
             second.passenger_status = request.direction;
-            //System.out.println("☑ Лифт №2 принял запрос на " + (request.start_floor + 1) + " этаже и едет " +  (request.direction == 1 ? "вверх" : "вниз"));
         }
         else
         {
             waiting.add(request);
             Main.flag = 1;
-            //System.out.println("⌛️ Все лифты заняты, запрос находится в ожидании");
         }
         Main.create_background();
     }
@@ -78,7 +72,6 @@ public class ElevatorManager {
             int passenger_count = elevator.passengers.size();
             elevator.passengers.removeAll(List.of(elevator.current_floor));
             elevator.target_floors.removeAll(List.of(elevator.current_floor));
-            //System.out.println("❌ На " + (elevator.current_floor + 1) + " этаже из лифта №"+ elevator.ID + " вышло " + (passenger_count - elevator.passengers.size()) + " человек");
             if (elevator.passengers.size() == 0)
             {
                 elevator.passenger_status = 0;
@@ -95,7 +88,6 @@ public class ElevatorManager {
                 elevator.target_floors.add(current_passenger);
                 elevator.passengers.add(current_passenger);
                 elevator.status = elevator.passenger_status;
-                //System.out.println("✅ Пассажир зашел в лифт №" + elevator.ID + " на " + (elevator.current_floor + 1) + " этаже");
             }
         }
         else
@@ -122,7 +114,6 @@ public class ElevatorManager {
                 pop_from_waiting(elevator, current_passenger);
                 elevator.target_floors.add(current_passenger);
                 elevator.passengers.add(current_passenger);
-                //System.out.println("✅ Пассажир зашел в лифт №" + elevator.ID + " на " + (elevator.current_floor + 1) + " этаже");
             }
         }
     }
@@ -155,7 +146,6 @@ public class ElevatorManager {
                 elevator.target_floors.add(request.start_floor);
                 elevator.passenger_status = request.direction;
                 elevator.status = elevator.current_floor < request.start_floor ? 1 : -1;
-                //System.out.println("☑ Лифт №" + elevator.ID + " принял запрос на " + (request.start_floor + 1) + "этаже и едет " +  (request.direction == 1 ? "вверх" : "вниз"));
             }
         }
         else if (elevator.target_floors.peek() == elevator.current_floor)
@@ -172,8 +162,7 @@ public class ElevatorManager {
         }
         if (elevator.status == 0)
         {
-            //System.out.println("☕ Лифт №" + elevator.ID + " находится на " + (elevator.current_floor + 1) + " этаже");
-            if (elevator.ID == 1)
+           if (elevator.ID == 1)
             {
                 Main.floor_1 = (elevator.current_floor + 1 < 10 ? Integer.toString(elevator.current_floor + 1) + " " : Integer.toString(elevator.current_floor + 1));
                 Main.info_1 = "0";
@@ -195,7 +184,6 @@ public class ElevatorManager {
                 elevator.status = 0;
                 elevator.passenger_status = 0;
             }
-            //System.out.println("\uD83D\uDD3D Лифт №" + elevator.ID + " едет вниз. Текущий номер этажа = " + (elevator.current_floor + 1));
             if (elevator.ID == 1)
             {
                 Main.floor_1 = (elevator.current_floor + 1 < 10 ? Integer.toString(elevator.current_floor + 1) + " " : Integer.toString(elevator.current_floor + 1));
@@ -218,7 +206,6 @@ public class ElevatorManager {
                 elevator.status = 0;
                 elevator.passenger_status = 0;
             }
-            //System.out.println("\uD83D\uDD3C Лифт №" + elevator.ID + " едет вверх. Текущий номер этажа = " + (elevator.current_floor + 1));
             if (elevator.ID == 1)
             {
                 Main.floor_1 = (elevator.current_floor + 1 < 10 ? Integer.toString(elevator.current_floor + 1) + " " : Integer.toString(elevator.current_floor + 1));
