@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static String floor_1 = "1 ", floor_2 = "1 ", came_1 = "0", came_2 = "0", left_1 = "0", left_2 = "0", info_1 = "0", info_2 = "0", start_floor = "  ", end_floor = "  ";
+    public static String floor_1 = "1 ", floor_2 = "1 ", info_1 = "0", info_2 = "0", start_floor = "  ", end_floor = "  ";
     public static int flag = 0;
     public static void clear_concole()
     {
