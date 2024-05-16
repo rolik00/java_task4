@@ -16,3 +16,14 @@
 ![image](https://github.com/rolik00/java_task4/assets/148611487/3fd42a79-a5d4-4a53-9417-eff805cfcdd7)
 
 ![image](https://github.com/rolik00/java_task4/assets/148611487/9421782c-7161-42ac-ae5f-a025fb9d9ecc)
+
+
+ТРЕБОВАНИЕ:
+
+! Запускать из консоли, так как в IntelliJ IDEA не возможно произвести очистку консоли, чтобы каждый раз рисунок выводился на одном и том же месте.
+
+Команды для запуска:
+
+javac Main.java Elevator.java ElevatorManager.java ElevatorManagerThread.java Request.java RequestThread.java
+
+java Main
